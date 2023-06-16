@@ -1,0 +1,31 @@
+.tag-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tag {
+  background-color: #66f;
+  border-radius: 3px;
+  border: 2px solid #33c;
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .5s;
+}
+
+.tag:hover {
+  transform: scale(1.15);
+}
+
+.btn-mostrar {
+  margin: 20px;
+}
+
+.article-container {
+  transition: transform 1s;
+  border: 3px solid #aaf;
+  border-radius: 5px;
+  background-color: #ccf;
+  padding: 10px;
+  margin-top: 10px;
+}
