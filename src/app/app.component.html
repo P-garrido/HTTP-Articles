@@ -1,12 +1,22 @@
 <button class="btn-mostrar" (click)="showTags()">Mostrar Tags</button>
 
 <div class="tag-container">
-  <div class="tag" *ngFor="let tag of this.tagList">
+  <div *ngFor="let tag of this.tagList">
     <app-tags [tag]="tag" (tagClicked)="getArticlesList($event)"></app-tags>
   </div>
 </div>
 
-<div *ngIf="this.articlesList!=0" class="article-container">
+
+<div class="load" *ngIf="this.loading==true">Cargando...</div>
+
+
+<div class="error-container" *ngIf="this.errorMsj!=''">
+  <p class="error">{{errorMsj}}</p>
+  <button class="btn-error" (click)="retry()">Reintentar</button>
+  <button class="btn-error" (click)="cancelError()">Cancelar</button>
+</div>
+
+<div *ngIf="this.articlesList.length!=0" class="article-container">
   <div *ngFor="let article of this.articlesList">
     <app-articles [article]="article"></app-articles>
     <hr>

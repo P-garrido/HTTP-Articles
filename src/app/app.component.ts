@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TagsService } from './tags.service';
+import { catchError, finalize } from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,18 @@ export class AppComponent {
   title = 'HTTP-Articles';
   tagList: any = [];
   articlesList: any = [];
+  loading: boolean = false;
+  errorMsj: string = '';
+  lastTag: string = '';
+
 
   getTagList() {
-    this.service.getTags();
-    return this.service.tags;
+    this.loading = true;
+    this.service.getTags()
+      .pipe(
+        finalize(() => this.loading = false),
+        catchError(async (error) => this.errorMsj = error.name))
+      .subscribe(response => this.tagList = response.tags);
   }
 
   showTags() {
@@ -24,7 +34,27 @@ export class AppComponent {
   }
 
   getArticlesList(tag: string) {
-    this.service.getArticles(tag);
-    this.articlesList = this.service.articles.slice(0, 5);
+    this.loading = true;
+    this.lastTag = tag;
+    this.service.getArticles(tag)
+      .pipe(
+        finalize(() => this.loading = false),
+        catchError(async (error) => this.errorMsj = error.name))
+      .subscribe(response => this.articlesList = response.articles.slice(0, 5));
+  }
+
+
+  cancelError() {
+    this.errorMsj = '';
+  }
+
+  retry() {
+    this.errorMsj = '';
+    if (this.tagList.length == 0) {
+      this.getTagList();
+    }
+    else {
+      this.getArticlesList(this.lastTag);
+    }
   }
 }
