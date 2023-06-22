@@ -1,7 +1,7 @@
 <h2>{{article.title}}</h2>
 <h3>{{article.description}}</h3>
 <p>{{article.body}}</p>
-<p>Date: {{article.createdAt}}</p>
+<p>Date: {{ article.createdAt | date:'short'}}</p>
 <h3>Tags:</h3>
 <div *ngFor='let tag of article.tagList'>
   <p>{{tag}}</p>
