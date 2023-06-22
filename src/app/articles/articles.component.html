@@ -6,3 +6,6 @@
 <div *ngFor='let tag of article.tagList'>
   <p>{{tag}}</p>
 </div>
+
+<textarea #userComment placeholder="Escribe tu comentario" class="comments-box"></textarea>
+<button (click)="comment(userComment.value); userComment.value=''">Enviar</button>

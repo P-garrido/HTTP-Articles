@@ -13,13 +13,16 @@ export class AppComponent {
   constructor(private service: TagsService) { }
 
   title = 'HTTP-Articles';
-  tagList: any = [];
+  tagList: Array<string> = [];
   articlesList: any = [];
   loading: boolean = false;
   errorMsj: string = '';
   lastTag: string = '';
 
 
+  ngOnInit() {
+    this.getTagList()
+  }
   getTagList() {
     this.loading = true;
     this.service.getTags()
@@ -30,7 +33,7 @@ export class AppComponent {
   }
 
   showTags() {
-    this.tagList = this.getTagList();
+    this.getTagList();
   }
 
   getArticlesList(tag: string) {

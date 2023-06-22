@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TagsService } from '../tags.service';
 
 @Component({
   selector: 'app-articles',
@@ -7,7 +8,19 @@ import { Component, Input } from '@angular/core';
 })
 export class ArticlesComponent {
 
+  constructor(private service: TagsService) { }
+
   @Input() article: any;
+
+
+
+
+  comment(text: string) {
+    this.service.login().subscribe(response => {
+      this.service.sendComment(text, response.user.token, this.article.slug)
+        .subscribe(response => console.log(response))
+    });
+  }
 
 
 

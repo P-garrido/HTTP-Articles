@@ -1,5 +1,3 @@
-<button class="btn-mostrar" (click)="showTags()">Mostrar Tags</button>
-
 <div class="tag-container">
   <div *ngFor="let tag of this.tagList">
     <app-tags [tag]="tag" (tagClicked)="getArticlesList($event)"></app-tags>

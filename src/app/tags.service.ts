@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,30 @@ export class TagsService {
   getArticles(tag: string) {
     const url = this.baseUrl + `/articles?tag=${tag}`;
     return this.http.get<any>(url)
+  }
+
+
+  login(): Observable<any> {
+    const url = this.baseUrl + `/users/login`
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(url,
+      {
+        "user": {
+          "email": "pedrogarrido971@gmail.com",
+          "password": "pedro123"
+        }
+      },
+      { headers }
+    )
+  }
+
+  sendComment(text: string, token: string, slug: string) {
+    const url = this.baseUrl + `/articles/${slug}/comments`;
+
+    const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
+    return this.http.post(url,
+      { comment: { body: text } },
+      { headers }
+    )
   }
 }
