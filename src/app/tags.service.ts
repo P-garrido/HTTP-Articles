@@ -38,9 +38,8 @@ export class TagsService {
 
   sendComment(text: string, token: string, slug: string) {
     const url = this.baseUrl + `/articles/${slug}/comments`;
-
     const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
-    return this.http.post(url,
+    return this.http.post<any>(url,
       { comment: { body: text } },
       { headers }
     )

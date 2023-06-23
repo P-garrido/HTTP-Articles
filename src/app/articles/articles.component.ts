@@ -12,13 +12,15 @@ export class ArticlesComponent {
 
   @Input() article: any;
 
+  commentList: any = [];
+
 
 
 
   comment(text: string) {
     this.service.login().subscribe(response => {
       this.service.sendComment(text, response.user.token, this.article.slug)
-        .subscribe(response => console.log(response))
+        .subscribe(response => this.commentList.push(response.comment))
     });
   }
 

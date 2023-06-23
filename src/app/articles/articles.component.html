@@ -7,5 +7,15 @@
   <p>{{tag}}</p>
 </div>
 
-<textarea #userComment placeholder="Escribe tu comentario" class="comments-box"></textarea>
+<h2>Comentarios</h2>
+<div *ngIf="this.commentList.length!=0" class="comment-container">
+
+  <div *ngFor="let comment of this.commentList">
+    <app-comments [comment]="comment"></app-comments>
+    <hr>
+  </div>
+</div>
+
+
+<textarea #userComment placeholder="Escribe tu comentario" class="comment-box"></textarea>
 <button (click)="comment(userComment.value); userComment.value=''">Enviar</button>

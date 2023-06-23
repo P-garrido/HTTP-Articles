@@ -1,7 +1,17 @@
-.comments-box {
+.comment-box {
   resize: none;
   overflow-y: scroll;
   height: 80px;
   display: block;
   width: 100%;
+}
+
+
+.comment-container {
+  max-height: 200px;
+  overflow-y: scroll;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  outline: 1px solid #000;
 }

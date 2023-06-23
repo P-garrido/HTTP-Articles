@@ -28,7 +28,7 @@ export class AppComponent {
     this.service.getTags()
       .pipe(
         finalize(() => this.loading = false),
-        catchError(async (error) => this.errorMsj = error.name))
+        catchError((error) => this.errorMsj = error.name))
       .subscribe(response => this.tagList = response.tags);
   }
 
@@ -42,7 +42,7 @@ export class AppComponent {
     this.service.getArticles(tag)
       .pipe(
         finalize(() => this.loading = false),
-        catchError(async (error) => this.errorMsj = error.name))
+        catchError((error) => this.errorMsj = error.name))
       .subscribe(response => this.articlesList = response.articles.slice(0, 5));
   }
 
